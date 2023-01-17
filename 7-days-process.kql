@@ -1,0 +1,8 @@
+let start = ago(7d);
+let end = now();
+ProcessEvents
+| where TimeGenerated >= start and TimeGenerated <= end
+| project FileName, Account, ProcessGuid, CommandLine
+| summarize count() by FileName
+| sort by count_  desc
+| take 10
